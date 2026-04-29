@@ -1,0 +1,106 @@
+
+services:
+  # --- INFRAESTRUCTURA WORDPRESS ---
+  wordpress-mysql:
+    image: mysql:8.0
+    container_name: wordpress-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpressuser
+      MYSQL_PASSWORD: wordpresspass
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - wordpress-network
+
+  wordpress-site:
+    image: wordpress:latest
+    container_name: wordpress-site
+    depends_on:
+      - wordpress-mysql
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: wordpress-mysql:3306
+      WORDPRESS_DB_USER: wordpressuser
+      WORDPRESS_DB_PASSWORD: wordpresspass
+      WORDPRESS_DB_NAME: wordpress
+
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - wordpress-network
+
+  # --- INFRAESTRUCTURA ESPOCRM ---
+  espocrm-mysql:
+    image: mysql:8.0
+    container_name: espocrm-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: espocrm
+      MYSQL_USER: espocrm
+      MYSQL_PASSWORD: espocrm
+    networks:
+      - espocrm-network
+
+  espocrm:
+    image: espocrm/espocrm
+    container_name: espocrm
+    depends_on:
+      - espocrm-mysql
+    ports:
+      - "8082:80"
+    environment:
+      ESPOCRM_DATABASE_HOST: espocrm-mysql
+      ESPOCRM_DATABASE_USER: espocrm
+      ESPOCRM_DATABASE_PASSWORD: espocrm
+      ESPOCRM_ADMIN_USERNAME: admin
+      ESPOCRM_ADMIN_PASSWORD: admin
+      ESPOCRM_SITE_URL: http://localhost:8082
+    networks:
+      - espocrm-network
+
+  # --- SERVICIOS PARA INGENIERÍA WEB (SPRING BOOT) ---
+  mysql-ingenieria-web:
+    image: mysql:8.0
+    container_name: mysql-ingenieria-web
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ingenieria_web
+      MYSQL_USER: springboot
+      MYSQL_PASSWORD: springboot123
+    networks:
+      - ingenieria-network
+
+  redis-ingenieria-web:
+    image: redis:7-alpine
+    container_name: redis-ingenieria-web
+    ports:
+      - "6379:6379"
+    networks:
+      - ingenieria-network
+
+  rabbitmq-ingenieria-web:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-ingenieria-web
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - ingenieria-network
+
+# DEFINICIÓN DE REDES Y VOLÚMENES
+networks:
+  wordpress-network:
+    driver: bridge
+  espocrm-network:
+    driver: bridge
+  ingenieria-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  wordpress-data:

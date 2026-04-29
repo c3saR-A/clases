@@ -1,0 +1,79 @@
+server:
+  port: 8081
+  virtual-host: kwsdttsn
+spring:
+  application:
+    name: clases
+
+  # ESTO DEBE IR DENTRO DE "spring:"
+  datasource:
+    url: jdbc:mysql://localhost:3306/ingenieria_web
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update # Crea/actualiza tablas automáticamente
+    show-sql: true # Muestra SQL en consola (útil para aprender)
+    properties:
+      hibernate:
+        format_sql: true # SQL formateado (más legible)
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  cache:
+    type: redis # Usa Redis como backend de caché
+    redis:
+      time-to-live: 600000 # TTL default: 10 minutos (en milisegundos)
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      # password: tu_password # Solo si configuraste requirepass
+
+  rabbitmq:
+    host: 84.46.241.34
+    port: 5672
+    username: admin
+    password: cambia_esta_password
+    virtualhost: /
+    #vulture.rmq.cloudamqp.com
+    #kwsdttsn
+    #kn6ivH9l5qbEzjmNKsD1GCzVZBZLQMij
+
+# TUS CONFIGURACIONES PERSONALIZADAS AFUERA DE "spring:"
+espocrm:
+  base-url: http://localhost:8082
+  api-key: fe86b15239f09be788a45ea5a5593dde
+
+woocommerce:
+  base-url: ${WORDPRESS_URL:https://wordpress.colibrihub.com/}
+  consumer-key: ${WOO_CONSUMER_KEY:ck_a84b22b5ed3001ab823202514250829ba6d4c1f2}
+  consumer-secret: ${WOO_CONSUMER_SECRET:cs_8d442527e37c3549d70bc57cf23cddcc508598f9}
+
+wordpress:
+  url: ${WORDPRESS_URL:https://wordpress.colibrihub.com/wp-json/wp/v2/posts}
+  base-url: ${WORDPRESS_URL:https://wordpress.colibrihub.com}
+  username: ${WORDPRESS_USER:admin}
+  app-password: ${WORDPRESS_APP_PASSWORD:91XE K2iQ JECb Cbew 5jii CFQX}
+
+
+#Externas
+#user
+# admin
+#pass
+# 91XE K2iQ JECb Cbew 5jii CFQX
+#Clave del cliente
+# ck_a84b22b5ed3001ab823202514250829ba6d4c1f2
+#Clave secreta del cliente
+# cs_8d442527e37c3549d70bc57cf23cddcc508598f9
+
+
+#Internas
+#user
+# admin
+#pass
+# Cvoq Nwj9 cAHw fzVm ZOWv xVON
+#Clave del cliente
+# ck_dc8b7d7e40102108764920c612853eadd0bd3d18
+#Clave secreta del cliente
+# cs_78f1d575a5389241a90ffc04eb29be2cded6a1d2
