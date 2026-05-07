@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff5e6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: #e62020;
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid #ffb300;
+        }
+        .header h1 { margin: 0; font-size: 28px; text-transform: uppercase; }
+        .content {
+            padding: 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .product-info {
+            background: #fff9c4;
+            padding: 20px;
+            border-left: 6px solid #ffb300;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        .product-info h3 {
+            margin-top: 0;
+            color: #e62020;
+            font-size: 22px;
+        }
+        .price-tag {
+            font-size: 20px;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .brand { font-weight: bold; color: #e62020; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>¡Buen provecho!</h1>
+    </div>
+    <div class="content">
+        <p>¡Hola! Qué gusto saludarte,</p>
+        <p>En <span class="brand">PepePollo Doble P</span> hemos recibido tu pedido e interés por el siguiente combo:</p>
+
+        <div class="product-info">
+            <h3 th:text="${productName}">Combo Familiar Crujiente</h3>
+            <p><strong>Total:</strong> <span class="price-tag">$<span th:text="${price}">0.00</span></span></p>
+            <p th:text="${description}">Delicioso pollo frito con el toque secreto de la casa, acompañado de complementos.</p>
+        </div>
+
+        <p>Nuestros expertos cocineros ya están al tanto. Un asesor de ventas te contactará en breve para coordinar la entrega y que nada te falte en la mesa.</p>
+
+        <p>¡Gracias por elegirnos!<br/>
+            <strong>El equipo de PepePollo Doble P</strong></p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2026 PepePollo Doble P - El mejor sabor en cada pieza</p>
+        <p>Este es un mensaje generado automáticamente para tu referencia.</p>
+    </div>
+</div>
+</body>
+</html>
