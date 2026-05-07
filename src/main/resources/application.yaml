@@ -1,6 +1,5 @@
 server:
   port: 8081
-  virtual-host: kwsdttsn
 spring:
   application:
     name: clases
@@ -31,17 +30,17 @@ spring:
       # password: tu_password # Solo si configuraste requirepass
 
   rabbitmq:
-    host: 84.46.241.34
-    port: 5672
-    username: admin
-    password: cambia_esta_password
-    virtualhost: /
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_USER}
+    password: ${RABBIT_PASS}
+    virtualhost: ${RABBIT_VIRTUAL_HOST}
 
   mail:
-    host: smtp.resend.com
-    port: 465
-    username: resend
-    password: re_LzNwdWAW_PJ7NeQrV5t2Z8K3HJQb7qAAx
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USER}
+    password: ${MAIL_PASS}
     properties:
       mail:
         smtp:
@@ -55,33 +54,22 @@ spring:
 # TUS CONFIGURACIONES PERSONALIZADAS AFUERA DE "spring:"
 espocrm:
   base-url: http://localhost:8082
-  api-key: fe86b15239f09be788a45ea5a5593dde
+  api-key: ${ESPO_API_KEY}
 
 woocommerce:
-  base-url: ${WORDPRESS_URL:https://wordpress.colibrihub.com/}
-  consumer-key: ${WOO_CONSUMER_KEY:ck_a84b22b5ed3001ab823202514250829ba6d4c1f2}
-  consumer-secret: ${WOO_CONSUMER_SECRET:cs_8d442527e37c3549d70bc57cf23cddcc508598f9}
+  base-url: ${WORDPRESS_URL}
+  consumer-key: ${WOO_CONSUMER_KEY}
+  consumer-secret: ${WOO_CONSUMER_SECRET}
 
 wordpress:
-  url: ${WORDPRESS_URL:https://wordpress.colibrihub.com/wp-json/wp/v2/posts}
-  base-url: ${WORDPRESS_URL:https://wordpress.colibrihub.com}
-  username: ${WORDPRESS_USER:admin}
-  app-password: ${WORDPRESS_APP_PASSWORD:91XE K2iQ JECb Cbew 5jii CFQX}
+  url: ${WORDPRESS_URL_POSTS}
+  base-url: ${WORDPRESS_URL}
+  username: ${WORDPRESS_USER}
+  app-password: ${WORDPRESS_APP_PASSWORD}
 app:
   email:
     from: "cesar.andrade@irya.xyz"
     subject: "2024010479|César Alfredo Andrade"
-
-#Externas
-#user
-# admin
-#pass
-# 91XE K2iQ JECb Cbew 5jii CFQX
-#Clave del cliente
-# ck_a84b22b5ed3001ab823202514250829ba6d4c1f2
-#Clave secreta del cliente
-# cs_8d442527e37c3549d70bc57cf23cddcc508598f9
-
 
 #Internas
 #user
